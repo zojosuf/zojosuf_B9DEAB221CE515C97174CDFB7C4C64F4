@@ -1,39 +1,22 @@
-class BankAccount:
-    def __init__(self, account_number, account_holder_name, initial_balance=0.0):
-        self.__account_number = account_number
-        self.__account_holder_name = account_holder_name
-        self.__account_balance = initial_balance
+def sort_students(student_list):
+    sorted_students = sorted(student_list, key=lambda student: student.cgpa, reverse=True)
+    return sorted_students
 
-    def deposit(self, amount):
-        if amount > 0:
-            self.__account_balance += amount
-            return f"Deposited ${amount}. New balance: ${self.__account_balance}"
-        else:
-            return "Invalid deposit amount. Amount must be greater than zero."
+# Define a student class
+class Student:
+    def __init__(self, name, roll_number, cgpa):
+        self.name = name
+        self.roll_number = roll_number
+        self.cgpa = cgpa
 
-    def withdraw(self, amount):
-        if 0 < amount <= self.__account_balance:
-            self.__account_balance -= amount
-            return f"Withdrew ${amount}. New balance: ${self.__account_balance}"
-        elif amount > self.__account_balance:
-            return "Insufficient funds."
-        else:
-            return "Invalid withdrawal amount. Amount must be greater than zero."
+# Test the function with sample student objects
+student1 = Student("Alice", "S001", 3.8)
+student2 = Student("Bob", "S002", 3.9)
+student3 = Student("Charlie", "S003", 3.7)
 
-    def display_balance(self):
-        return f"Account balance for {self.__account_holder_name}: ${self.__account_balance}"
+students = [student1, student2, student3]
 
+sorted_students = sort_students(students)
 
-# Example usage:
-if __name__ == "__main__":
-    # Create a BankAccount instance
-    account = BankAccount("123456789", "John Doe", 1000.0)
-
-    # Deposit money
-    print(account.deposit(500))  # Deposited $500. New balance: $1500.0
-
-    # Withdraw money
-    print(account.withdraw(200))  # Withdrew $200. New balance: $1300.0
-
-    # Display account balance
-    print(account.display_balance())  # Account balance for John Doe: $1300.0
+for student in sorted_students:
+    print(f"Name: {student.name}, Roll Number: {student.roll_number}, CGPA: {student.cgpa}")
